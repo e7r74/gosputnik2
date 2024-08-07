@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление компьютерами</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #eee;
+            padding: 20px;
+            margin: 0;
+            background: url('https://images.pexels.com/photos/3001154/pexels-photo-3001154.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #eee;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #eee;
+        }
+
+        input, select, button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="text"], input[type="number"], input[type="datetime-local"], select {
+            background-color: #333;
+            color: #eee;
+        }
+
+        button {
+            background-color: cornflowerblue;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4a90e2;
+        }
+
+        .error-message {
+            text-align: center;
+            margin-top: 20px;
+            color: red;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-collapse: collapse;
+            color: #eee;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        th {
+            background-color: #444;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                padding: 15px;
+            }
+
+            input, select, button {
+                width: calc(100% - 16px);
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #eee;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            background: url('https://www.transparenttextures.com/patterns/arabesque.png');
+        }
+    </style>
+</head>
+<body>
+<h1>Управление компьютерами</h1>
+
+<!-- Форма для добавления ПК -->
+<form th:action="@{/admin/addComputer}" method="post">
+    <label for="addRoom">Зал:</label>
+    <input type="text" id="addRoom" name="room">
+    <label for="addNumber">Номер ПК:</label>
+    <input type="number" id="addNumber" name="number">
+    <label for="addStatus">Статус:</label>
+    <select id="addStatus" name="status">
+        <option value="Свободен">Свободен</option>
+        <option value="Занят">Занят</option>
+        <option value="Забронирован">Забронирован</option>
+    </select>
+    <label for="addBookingTime">Время бронирования:</label>
+    <input type="datetime-local" id="addBookingTime" name="bookingTime">
+    <label for="addBookingTimeEnd">Время окончания бронирования:</label>
+    <input type="datetime-local" id="addBookingTimeEnd" name="booking_time_end">
+    <button type="submit">Добавить ПК</button>
+</form>
+
+<!-- Таблица компьютеров -->
+<table>
+    <thead>
+    <tr>
+        <th>Зал</th>
+        <th>Номер ПК</th>
+        <th>Статус</th>
+        <th>Время бронирования</th>
+        <th>Время окончания бронирования</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="computer : ${computers}">
+        <td th:text="${computer.room}"></td>
+        <td th:text="${computer.number}"></td>
+        <td th:text="${computer.status}"></td>
+        <td th:text="${computer.bookingTime}"></td>
+        <td th:text="${computer.booking_time_end}"></td>
+        <td>
+            <form th:action="@{/admin/deleteComputer}" method="post" th:object="${computer}">
+                <input type="hidden" name="id" th:value="${computer.id}" />
+                <button type="submit" class="delete-button">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Сообщение об ошибке -->
+<div th:if="${error}" class="error-message">
+    <p th:text="${error}"></p>
+</div>
+<div class="image-container">
+    <img src="/Sputnik2.png" alt="Схема зала">
+</div>
+</body>
+</html>
+
+
+

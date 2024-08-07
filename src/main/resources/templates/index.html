@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #eee;
+            padding: 20px;
+            margin: 0;
+            background: url('https://media1.tenor.com/m/ZLEbFakygbgAAAAd/relaxed.gif') fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #eee;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            color: #eee;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #555;
+        }
+
+        th {
+            background-color: #555;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #666;
+        }
+
+        tr:hover {
+            background-color: #777;
+        }
+
+        .status-available {
+            color: #5cb85c;
+        }
+
+        .status-unavailable {
+            color: #d9534f;
+        }
+
+        .status-reserved {
+            color: #f0ad4e;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+        }
+
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #eee;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            background: url('https://www.transparenttextures.com/patterns/arabesque.png');
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #a8d564;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .btn:hover {
+            background-color: forestgreen;
+        }
+    </style>
+</head>
+<body>
+<h1>Список компьютеров</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Зал</th>
+        <th>Номер</th>
+        <th>Статус</th>
+        <th>Время бронирования</th>
+        <th>Время окончания бронирования</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="computer : ${computers}">
+        <td th:text="${computer.room}"></td>
+        <td th:text="${computer.number}"></td>
+        <td th:text="${computer.status.toString()}" th:class="${computer.status.toString().toLowerCase()}"></td>
+        <td th:text="${computer.bookingTime != null ? computer.bookingTime : ''}"></td>
+        <td th:text="${computer.booking_time_end != null ? computer.booking_time_end : ''}"></td>
+    </tr>
+    </tbody>
+</table>
+<h1>Схема зала</h1>
+<div class="image-container">
+    <img src="/Sputnik2.png" alt="Схема зала">
+</div>
+<a href="https://wa.me/+77073260711/" class="btn">Забронировать ПК</a>
+</body>
+</html>
+
+
