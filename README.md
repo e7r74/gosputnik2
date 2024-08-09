@@ -1,4 +1,7 @@
 https://efficient-friendship-production.up.railway.app/
-![image](https://github.com/user-attachments/assets/66de50a6-10a0-434e-bfbf-e055cc7de1e9)
 
-![image](https://github.com/user-attachments/assets/9dd96824-9fdd-45b6-9932-f9df076ef780)
+
+![image](https://github.com/user-attachments/assets/a9af1c1b-ce55-41df-a982-be9afe3037c9)
+
+
+![image](https://github.com/user-attachments/assets/c1c9c05d-0b43-43de-8ab4-504a96c13b53)
